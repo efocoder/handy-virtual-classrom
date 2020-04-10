@@ -1,5 +1,72 @@
 {% extends 'layout/base.html' %}
+{% load static %}
 
 {% block content %}
-    <h1>Hello</h1>
+    <div class="section white darken-1">
+        <div class="row">
+            <div class="col s12 m6">
+                <h4>
+                    Handy Virtual Classroom is a free online conference room for scheduling class sessions.
+                </h4>
+                <br>
+                <a class="waves-effect waves-light btn light-blue">Start Now: it's free</a>
+            </div>
+            <div class="col s12 m6">
+                <div class="splash-image-container">
+                    <img src="{% static 'img/conf1-resize.png' %}"
+                         class="responsive-img" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section grey lighten-2" style="min-height: 300px">
+        <div class="container">
+            <div class="row">
+                <div class="col s12 m6 l6">
+                    <div class="center">
+                        <h5>Video Classrooms</h5>
+                        <img src="{% static 'img/video.png' %}"
+                             class="responsive-img" alt="">
+                        <h6>Online real time video classroom</h6>
+                    </div>
+                </div>
+                <div class="col s12 m6 l6">
+                    <div class="center">
+                        <h5>Discussions through Chat</h5>
+                        <img src="{% static 'img/chat.png' %}"
+                             class="responsive-img" alt="">
+                        <h6>Discussion through chat during class sessions</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="page-footer white">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="black-text">Handy Virtual Classroom</h5>
+                <p class="black-text text-lighten-4">
+                    Classroom on your device!. Start teaching and learning today.
+                </p>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="black-text">Links</h5>
+                <ul>
+                  <li><a class="black-text text-lighten-3" href="#!">Link 1</a></li>
+                  <li><a class="black-text text-lighten-3" href="#!">Link 2</a></li>
+                  <li><a class="black-text text-lighten-3" href="#!">Link 3</a></li>
+                  <li><a class="black-text text-lighten-3" href="#!">Link 4</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright black">
+            <div class="container">
+             <div class="center">
+                 &copy {{ copyright }} Copyright All rights reserved
+             </div>
+            </div>
+          </div>
+        </footer>
 {% endblock %}

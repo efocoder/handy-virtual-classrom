@@ -1,6 +1,7 @@
 body{
     background: white;
 }
-/*nav {*/
-/*    background: chartreuse;*/
-/*}*/
+.reg-bg {
+    background-image: url("/static/img/conf2.png");
+    background: rebeccapurple;
+}

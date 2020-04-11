@@ -1,0 +1,65 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="valign-wrapper" style="min-height: calc(100vh - 64px)">
+        <div class="container grey lighten-4" style="min-height: 500px">
+            <div class="row">
+                <div class="col s12 l8 m6">
+                    <img src="{% static 'img/conf2.png' %}"
+                         alt=""
+                         class="responsive-img hide-on-small-only"
+                         style="height: 500px">
+                </div>
+                <div class="col s12  l4 m6 center-align">
+                    <h4 class="center">Register Here</h4>
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <div class="input-field ">
+                            <i class="material-icons prefix">account_circle</i>
+                            {{ form.username }}
+                            <label for="{{ form.username.auto_id }}">{{ form.username.label|title }}</label>
+                            <i>{{ form.username.errors }}</i>
+                        </div>
+                        <div class="input-field">
+                            <i class="material-icons prefix">email</i>
+                            {{ form.email }}
+                            <label for="{{ form.email.auto_id }}">{{ form.email.label|title }}</label>
+                            <i>{{ form.email.errors }}</i>
+                        </div>
+                        <div class="input-field">
+                            <i class="material-icons prefix">account_circle</i>
+                            {{ form.first_name }}
+                            <label for="{{ form.first_name.auto_id }}">{{ form.first_name.label|title }}</label>
+                            <i>{{ form.first_name.errors }}</i>
+                        </div>
+                        <div class="input-field">
+                            <i class="material-icons prefix">account_circle</i>
+                            {{ form.last_name }}
+                            <label for="{{ form.last_name.auto_id }}">{{ form.last_name.label|title }}</label>
+                            <i>{{ form.last_name.errors }}</i>
+                        </div>
+                        <div class="input-field">
+                            <i class="material-icons prefix">lock</i>
+                            {{ form.password1 }}
+                            <label for="{{ form.password1.auto_id }}">{{ form.password1.label|title }}</label>
+                            <i>{{ form.password1.errors }}</i>
+                        </div>
+                        <div class="input-field ">
+                            <i class="material-icons prefix">lock</i>
+                            {{ form.password2 }}
+                            <label for="{{ form.password2.auto_id }}">{{ form.password2.label|title }}</label>
+                            <i>{{ form.password2.errors }}</i>
+                        </div>
+
+                        <button type="submit" class="btn waves-effect waves-light light-blue center-align" name="action">
+                            Submit
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

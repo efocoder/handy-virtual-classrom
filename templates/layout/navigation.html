@@ -9,10 +9,9 @@
     <nav class="light-blue">
         <div class="nav-wrapper">
             <a href="#" data-target="sidenav" class="sidenav-trigger show-on-large "><i class="material-icons">menu</i></a>
-            <a href="#!" class="brand-logo">HVC</a>
+            <a href="{% url 'home' %}" class="brand-logo">HVC</a>
             <ul class="right hide-on-med-and-down">
-                <li><a href="sass.html">Sass</a></li>
-                <li><a href="badges.html">Components</a></li>
+                <li><a href="{% url 'registerPage' %}" class="btn orange darken-4">Sign Up</a></li>
                 <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Dropdown<i
                         class="material-icons right">arrow_drop_down</i></a></li>
             </ul>

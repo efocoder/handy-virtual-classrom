@@ -11,9 +11,26 @@
             <a href="#" data-target="sidenav" class="sidenav-trigger show-on-large "><i class="material-icons">menu</i></a>
             <a href="{% url 'home' %}" class="brand-logo">HVC</a>
             <ul class="right hide-on-med-and-down">
-                <li><a href="{% url 'registerPage' %}" class="btn orange darken-4">Sign Up</a></li>
-                <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Dropdown<i
-                        class="material-icons right">arrow_drop_down</i></a></li>
+                {% if not request.user.is_authenticated %}
+                    <li><a href="{% url 'loginPage' %}" class="">Login</a></li>
+                {% endif %}
+
+                {% if request.user.is_authenticated %}
+                    <li><a href="{% url 'logoutPage' %}" class="">Log Out</a></li>
+                {% endif %}
+
+                {% if not request.user.is_authenticated %}
+                    <li><a href="{% url 'registerPage' %}" class="btn orange darken-4">Sign Up</a></li>
+                {% endif %}
+
+                {% if request.user.is_authenticated %}
+                    <li>
+                        <a class="dropdown-trigger" href="#!" data-target="dropdown1">
+                            {{ request.user }} <i class="material-icons right">arrow_drop_down</i>
+                        </a>
+                    </li>
+                {% endif %}
+
             </ul>
         </div>
     </nav>

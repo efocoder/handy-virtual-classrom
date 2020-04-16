@@ -10,6 +10,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <link href="{% static 'css/styles.css' %}" rel="stylesheet">
 
 </head>
@@ -18,7 +19,7 @@
     {% include 'layout/navigation.html' %}
 </header>
 <section>
-    {% include "layout/messages.html" %}
+{#    {% include "layout/messages.html" %}#}
     {% block content %}{% endblock %}
 </section>
 

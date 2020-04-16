@@ -13,46 +13,47 @@
                 </div>
                 <div class="col s12  l4 m6 center-align">
                     <h4 class="center">Register Here</h4>
-                    <form action="" method="POST">
+                    <form action="{% url 'registerPage' %}" method="POST">
                         {% csrf_token %}
                         <div class="input-field ">
                             <i class="material-icons prefix">account_circle</i>
                             {{ form.username }}
                             <label for="{{ form.username.auto_id }}">{{ form.username.label|title }}</label>
-                            <i>{{ form.username.errors }}</i>
+                            {{ form.username.errors }}
                         </div>
                         <div class="input-field">
                             <i class="material-icons prefix">email</i>
                             {{ form.email }}
                             <label for="{{ form.email.auto_id }}">{{ form.email.label|title }}</label>
-                            <i>{{ form.email.errors }}</i>
+                           {{ form.email.errors }}
                         </div>
                         <div class="input-field">
                             <i class="material-icons prefix">account_circle</i>
                             {{ form.first_name }}
                             <label for="{{ form.first_name.auto_id }}">{{ form.first_name.label|title }}</label>
-                            <i>{{ form.first_name.errors }}</i>
+                           {{ form.first_name.errors }}
                         </div>
                         <div class="input-field">
                             <i class="material-icons prefix">account_circle</i>
                             {{ form.last_name }}
                             <label for="{{ form.last_name.auto_id }}">{{ form.last_name.label|title }}</label>
-                            <i>{{ form.last_name.errors }}</i>
+                            {{ form.last_name.errors }}
                         </div>
                         <div class="input-field">
                             <i class="material-icons prefix">lock</i>
                             {{ form.password1 }}
                             <label for="{{ form.password1.auto_id }}">{{ form.password1.label|title }}</label>
-                            <i>{{ form.password1.errors }}</i>
+                            {{ form.password1.errors }}
                         </div>
                         <div class="input-field ">
                             <i class="material-icons prefix">lock</i>
                             {{ form.password2 }}
                             <label for="{{ form.password2.auto_id }}">{{ form.password2.label|title }}</label>
-                            <i>{{ form.password2.errors }}</i>
+                          {{ form.password2.errors }}
                         </div>
 
-                        <button type="submit" class="btn waves-effect waves-light light-blue center-align" name="action">
+                        <button type="submit" class="btn waves-effect waves-light light-blue center-align"
+                                name="action">
                             Submit
                             <i class="material-icons right">send</i>
                         </button>

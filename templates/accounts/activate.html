@@ -1,0 +1,5 @@
+{% autoescape off %}
+Hi {{ user.username }}
+Please confirm your account to.
+http://{{ domain }}{% url 'activate' uidbase64=uid token=token %}
+{% endautoescape %}

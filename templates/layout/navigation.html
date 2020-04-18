@@ -8,37 +8,50 @@
 <div class="navbar-fixed">
     <nav class="light-blue">
         <div class="nav-wrapper">
-            <a href="#" data-target="sidenav" class="sidenav-trigger show-on-large "><i class="material-icons">menu</i></a>
+            <a href="#" data-target="sidenav" class="sidenav-trigger "><i class="material-icons">menu</i></a>
             <a href="{% url 'home' %}" class="brand-logo">HVC</a>
             <ul class="right hide-on-med-and-down">
                 {% if not request.user.is_authenticated %}
                     <li><a href="{% url 'loginPage' %}" class="">Login</a></li>
-                {% endif %}
-
-                {% if request.user.is_authenticated %}
-                    <li><a href="{% url 'logoutPage' %}" class="">Log Out</a></li>
-                {% endif %}
-
-                {% if not request.user.is_authenticated %}
                     <li><a href="{% url 'registerPage' %}" class="btn orange darken-4">Sign Up</a></li>
                 {% endif %}
 
                 {% if request.user.is_authenticated %}
-                    <li>
+                    <li><a href="{% url 'logoutPage' %}" class="">Log Out</a></li>
+                      <li>
                         <a class="dropdown-trigger" href="#!" data-target="dropdown1">
                             {{ request.user }} <i class="material-icons right">arrow_drop_down</i>
                         </a>
                     </li>
                 {% endif %}
 
+
             </ul>
         </div>
     </nav>
 </div>
 
-<ul class="sidenav" id="sidenav">
-    <li><a href="sass.html">Sass</a></li>
-    <li><a href="badges.html">Components</a></li>
-    <li><a href="collapsible.html">Javascript</a></li>
-    <li><a href="mobile.html">Mobile</a></li>
+<ul class="sidenav " id="sidenav">
+{#    {% if request.user.is_authenticated %}#}
+{#        <li>#}
+{#            <a class="dropdown-trigger" href="#!" data-target="dropdown1">#}
+{#                {{ request.user }} <i class="material-icons right">arrow_drop_down</i>#}
+{#            </a>#}
+{#        </li>#}
+{#        <li><a href="{% url 'logoutPage' %}" class="">Log Out</a></li>#}
+{#    {% endif %}#}
+{#    {% if not request.user.is_authenticated %}#}
+{#        <li><a href="{% url 'loginPage' %}" class="">Login</a></li>#}
+{#        <li><a href="{% url 'registerPage' %}" class="btn orange darken-4">Sign Up</a></li>#}
+{#    {% endif %}#}
+
+{#    {% if request.user.is_authenticated %}#}
+{#        <li><a href="{% url 'logoutPage' %}" class="">Log Out</a></li>#}
+{#    {% endif %}#}
+
+{#    {% if not request.user.is_authenticated %}#}
+{#        <li><a href="{% url 'registerPage' %}" class="btn orange darken-4">Sign Up</a></li>#}
+{#    {% endif %}#}
+
+
 </ul>

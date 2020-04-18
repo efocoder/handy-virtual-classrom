@@ -1,0 +1,29 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col s10 m6 l6 offset-s1 offset-m3 offset-l3">
+                <form action="{% url 'schedule' %}" method="post">
+                    {% csrf_token %}
+                    <div class="input-field ">
+                        {{ form.schedule_title }}
+                        <label for="{{ form.schedule_title.auto_id }}">Title</label>
+                        {{ form.schedule_title.errors }}
+                    </div>
+                    <div class="input-field ">
+                        {{ form.start_date }}
+                        <label for="{{ form.start_date.auto_id }}">Start</label>
+                        {{ form.start_date.errors }}
+                    </div>
+                    <button type="submit" class="btn waves-effect waves-light light-blue center-align"
+                            name="action">
+                        Submit
+                        <i class="material-icons right">send</i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

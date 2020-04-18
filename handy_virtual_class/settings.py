@@ -26,6 +26,7 @@ SECRET_KEY = 'w*%x)#ox_-^l2x_yd_v3%xvn5httm=573hlh#)6jruc-q3_0o2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
+ADMIN_ENABLED = False
 
 ALLOWED_HOSTS = ['handy-virtual-classroom-dev.herokuapp.com', '127.0.0.1', 'localhost']
 

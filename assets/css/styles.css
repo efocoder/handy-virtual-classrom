@@ -2,10 +2,10 @@ body {
     background: white;
 }
 
-.reg-bg {
-    background-image: url("/static/img/conf2.png");
-    background: rebeccapurple;
-}
+/*.reg-bg {*/
+/*    background-image: url("/static/img/conf2.png");*/
+/*    background: rebeccapurple;*/
+/*}*/
 
 ul.errorlist {
     color: red;

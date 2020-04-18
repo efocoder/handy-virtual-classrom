@@ -27,34 +27,10 @@ def registerPage(request):
         form = CreateUserForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            user.is_active = False
+            user.is_active = True
             user.save()
-            print('saved', user.pk)
-            current_site = get_current_site(request)
-            email_subject = "Activate your Account"
-            message = render_to_string('accounts/activate.html',
-                                       {
-                                           'user': user,
-                                           'domain': current_site.domain,
-                                           'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                                           'token': generate_token.make_token(user)
-                                       }
-                                       )
-            # email = EmailMessage(
-            #     email_subject,
-            #     message,
-            #     'HVC',
-            #     [user.email],
-            # )
-            # email.send()
 
-            send_mail(
-                email_subject,
-                message,
-                'HVC',
-                [user.email],
-                fail_silently=False,
-            )
+            activate_msg(request, user)
 
             messages.success(request, 'Please confirm your email')
             return redirect('loginPage')

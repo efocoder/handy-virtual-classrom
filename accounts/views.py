@@ -1,3 +1,5 @@
+import os
+
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
@@ -8,9 +10,11 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_text, DjangoUnicodeDecodeError
 from django.core.mail import EmailMessage, send_mail
 
+
 from .forms import CreateUserForm
 from .models import MyUser
 from .utils import generate_token
+
 
 
 def registerPage(request):
@@ -25,8 +29,32 @@ def registerPage(request):
             user = form.save(commit=False)
             user.is_active = False
             user.save()
+            print('saved', user.pk)
+            current_site = get_current_site(request)
+            email_subject = "Activate your Account"
+            message = render_to_string('accounts/activate.html',
+                                       {
+                                           'user': user,
+                                           'domain': current_site.domain,
+                                           'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                                           'token': generate_token.make_token(user)
+                                       }
+                                       )
+            # email = EmailMessage(
+            #     email_subject,
+            #     message,
+            #     'HVC',
+            #     [user.email],
+            # )
+            # email.send()
 
-            activate_msg(request, user)
+            send_mail(
+                email_subject,
+                message,
+                'HVC',
+                [user.email],
+                fail_silently=False,
+            )
 
             messages.success(request, 'Please confirm your email')
             return redirect('loginPage')
@@ -79,6 +107,10 @@ def activate(request, uidbase64, token):
 
 
 def activate_msg(request, user):
+    print("###########################")
+    print('This is the user', user)
+    print('This is the request', request)
+    print("###########################")
     current_site = get_current_site(request)
     email_subject = "Activate your Account"
     message = render_to_string('accounts/activate.html',

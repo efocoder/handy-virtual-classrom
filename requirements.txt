@@ -4,6 +4,7 @@ django-extensions==2.2.9
 django-filter==2.2.0
 gunicorn==20.0.4
 Markdown==3.2.1
+python-dotenv==0.12.0
 pytz==2019.3
 six==1.14.0
 sqlparse==0.3.1

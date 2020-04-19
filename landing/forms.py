@@ -6,6 +6,8 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
 from django.forms import ModelForm, TextInput, DateInput, TimeInput
+from django import forms
+
 from .models import ScheduleClass, ClassRoom
 
 
@@ -63,3 +65,6 @@ class ScheduleClassForm(ModelForm):
             raise ValidationError(_('Start time cannot greater than or equal to end time'))
 
         return time_end
+
+class ConnectForm(forms.Form):
+    class_name = forms.CharField(label='Class Name', required=True)

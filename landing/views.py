@@ -1,13 +1,15 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ValidationError
 from django.shortcuts import render, redirect
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
+from django.utils.translation import gettext_lazy as _
 import datetime
 import time
 import calendar
 
 from accounts.models import MyUser
-from .forms import ScheduleClassForm
+from .forms import ScheduleClassForm, ConnectForm
 from .models import ScheduleClass, ClassRoom, InvitedList
 
 from twilio_details import twilio
@@ -61,7 +63,13 @@ def schedule(request):
 
 @login_required
 def connect(request):
-    context = {}
+    form = ConnectForm()
+    if request.method == 'POST':
+        form = ConnectForm(request.POST)
+        if form.is_valid():
+            return form
+
+    context = {'form': form}
     return render(request, 'landing/connect.html', context)
 
 
@@ -123,3 +131,4 @@ def invited_list_insert(twilio_sid, schedule_id, request):
         invite.save()
 
     return invite
+

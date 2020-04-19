@@ -29,7 +29,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECRET_KEY = 'w*%x)#ox_-^l2x_yd_v3%xvn5httm=573hlh#)6jruc-q3_0o2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
+DEBUG = False
 ADMIN_ENABLED = False
 
 ALLOWED_HOSTS = ['handy-vc.herokuapp.com', '127.0.0.1', 'localhost']
@@ -81,14 +81,13 @@ WSGI_APPLICATION = 'handy_virtual_class.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-prod_db  =  dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(prod_db)
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 
 AUTH_USER_MODEL = 'accounts.MyUser'
 

@@ -12,7 +12,7 @@ from accounts.models import MyUser
 from .forms import ScheduleClassForm, ConnectForm
 from .models import ScheduleClass, ClassRoom, InvitedList
 
-from twilio_details import twilio
+from twilio_details import twilio_detail
 
 
 @login_required
@@ -74,7 +74,7 @@ def connect(request):
 
 
 def session(request, class_unique_name):
-    token = twilio.generate_access_token(request.user.pk, class_unique_name)
+    token = twilio_detail.generate_access_token(request.user.pk, class_unique_name)
 
     return token
 
@@ -106,7 +106,7 @@ def calculate_date_difference(start_date, start_time, end_time):
 def create_classroom(request, schedule_id):
     class_name = generate_class_unique_name()
 
-    twilio_room = twilio.create_room(request, class_name)
+    twilio_room = twilio_detail.create_room(request, class_name)
 
     print(twilio_room)
     schedule = ScheduleClass.objects.get(pk=schedule_id)

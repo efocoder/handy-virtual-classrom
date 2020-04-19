@@ -36,15 +36,19 @@ class ClassRoom(models.Model):
 
 
     def __str__(self):
-        return  self.class_name
+        return  self.class_unique_name
 
 
 class InvitedList(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     schedule_id = models.ForeignKey(ScheduleClass, on_delete=models.CASCADE)
     invited_user_id = models.ForeignKey(MyUser, on_delete=models.CASCADE)
+    twilio_sid = models.CharField(max_length=100, default=None)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         db_table = 'invited_lists'
+
+    # def __str__(self):
+    #     return self.schedule_id

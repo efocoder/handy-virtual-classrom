@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $('.start_date').datepicker({
-        format: "yyyy-mm-dd"
+        format: "yyyy-mm-dd",
     });
     $('.time_start').timepicker({
         twelveHour: false

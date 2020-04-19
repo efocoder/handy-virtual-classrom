@@ -47,6 +47,9 @@ class ScheduleClassForm(ModelForm):
         if not time_start:
             raise ValidationError(_('This field is required'))
 
+        if time_start <= datetime.datetime.now().time():
+            raise ValidationError(_('Invalid time'))
+
         return time_start
 
     def clean_time_end(self):

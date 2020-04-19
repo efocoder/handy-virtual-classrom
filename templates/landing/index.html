@@ -2,18 +2,16 @@
 {% load static %}
 
 {% block content %}
-    <div class="valign-wrapper" style="min-height: calc(100vh - 64px)">
+    <div class="" style="margin-top: 10vh">
         <div class="container grey lighten-4 z-depth-4" style="min-height: 500px">
             <div class="row">
-                {#                offset-m3 offset-s2#}
-                <div class="col s12 m8 l8 offset-m3 offset-l3">
-                    <div class="section valign-wrapper" style="margin-top: 5vh">
+                <div class="col s12 m10 l10 offset-m1 offset-l1">
+                    <div class="section" style="margin-top: 5vh">
                         <div class="row">
-                            <div class="col s12 m7 l7 white" >
+                            <div class="col s12 m7 l7 white">
                                 <div class="row ">
                                     <div class="col s12 m6 l6">
                                         <div class="section center">
-                                            {#<i class="large material-icons " style="color: blue">videocam</i>#}
                                             <a href="#">
                                                 <img src="{% static 'img/learning.png' %}" alt=""
                                                      class="responsive-img"
@@ -22,12 +20,10 @@
                                                 <h6 class="medium">New Class Session</h6>
                                             </a>
                                         </div>
-
                                     </div>
                                     <div class="col s12 m6 l6">
                                         <div class="section center">
-                                            {# <i class="large material-icons">event</i>#}
-                                            <a href="#">
+                                            <a href="{% url 'connect' %}">
                                                 <img src="{% static 'img/join-class.png' %}" alt=""
                                                      class="responsive-img"
                                                      style="width: 90px">
@@ -35,13 +31,11 @@
                                                 <h6 class="medium">Join Class Session</h6>
                                             </a>
                                         </div>
-
                                     </div>
                                 </div>
                                 <div class="row ">
                                     <div class="col s12 m6 l6">
                                         <div class="section center">
-                                            {#<i class="large material-icons " style="color: blue">videocam</i>#}
                                             <a href="{% url 'schedule' %}">
                                                 <img src="{% static 'img/calender.png' %}" alt=""
                                                      class="responsive-img"
@@ -50,40 +44,37 @@
                                                 <h6 class="medium">Schedule</h6>
                                             </a>
                                         </div>
-
                                     </div>
-{#                                    <div class="col s12 m6 l6">#}
-{#                                        <div class="section center">#}
-                                            {# <i class="large material-icons">event</i>#}
-{#                                            <a href="#">#}
-{#                                                <img src="{% static 'img/join-class.png' %}" alt=""#}
-{#                                                     class="responsive-img"#}
-{#                                                     style="width: 90px">#}
-{#                                                <br>#}
-{#                                                <span class="flow-text">Join Class Session</span>#}
-{#                                            </a>#}
-{#                                        </div>#}
-{##}
-{#                                    </div>#}
                                 </div>
                             </div>
                             <div class="col s12 m5 l5">
+
                                 <div class="card medium">
                                     <div class="card-content blue lighten-3 center">
                                         <span style="font-size: xx-large">
-                                            {{ today.time }}
+                                            {{ today.time|date:'G:i' }}
                                         </span>
                                         <br>
                                         <span style="font-size: large">{{ today.date }}</span>
                                     </div>
-                                    {#                                    <div class="divider"></div>#}
+                                    <div class="divider"></div>
                                     <div class="card-content">
                                         {% if not upcoming %}
                                             <div class="valign-wrapper ">
                                                 <p class="center">No upcoming sessions today</p>
                                             </div>
                                         {% endif %}
-                                        {{ upcoming }}
+
+                                        <div class="collection">
+                                            {% for schedule in upcoming %}
+{#                                                <form id = "form-id" action="/events/attending" method="post">{% csrf_token %}#}
+{#                                                    <a href="#" onclick="document.forms['form-id'].submit();" >  Submit </a> #}
+{#                                                    {{form4.going}} I am attending this event!#}
+{#                                                </form>#}
+                                                <a href="#" class="collection-item">{{ schedule.schedule_id__schedule_title }}
+                                                    ( {{ schedule.schedule_id__time_start|date:"G:i"}})
+                                                </a>
+                                            {% endfor %}
                                     </div>
                                 </div>
                             </div>

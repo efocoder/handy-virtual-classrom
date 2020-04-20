@@ -11,11 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-
-import dj_database_url
-from dj_database_url import config
 from dotenv import load_dotenv
-
 load_dotenv()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -96,6 +92,11 @@ DATABASES = {
         'HOST': 'localhost'
     }
 }
+
+import dj_database_url
+
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
 
 
 

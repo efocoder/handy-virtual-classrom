@@ -28,7 +28,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'w*%x)#ox_-^l2x_yd_v3%xvn5httm=573hlh#)6jruc-q3_0o2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
+DEBUG = True
 ADMIN_ENABLED = False
 
 ALLOWED_HOSTS = ['handy-vc.herokuapp.com', '127.0.0.1', 'localhost', '0.0.0.0']
@@ -90,9 +90,9 @@ WSGI_APPLICATION = 'handy_virtual_class.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'twilio-hackathon',
-        'USER': 'test',
-        'PASSWORD': 'test',
+        'NAME': os.getenv('DB'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASS'),
         'HOST': 'localhost'
     }
 }

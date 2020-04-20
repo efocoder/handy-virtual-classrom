@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+
+import dj_database_url
+from dj_database_url import config
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -25,7 +28,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'w*%x)#ox_-^l2x_yd_v3%xvn5httm=573hlh#)6jruc-q3_0o2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 ADMIN_ENABLED = False
 
 ALLOWED_HOSTS = ['handy-vc.herokuapp.com', '127.0.0.1', 'localhost']
@@ -78,11 +81,19 @@ WSGI_APPLICATION = 'handy_virtual_class.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+
+SECRET_KEY = config('SECRET_KEY')
+DEBUG = config('DEBUG', default=False, cast=bool)
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': dj_database_url.config(
+        default=config('DATABASE_URL')
+    )
 }
 
 AUTH_USER_MODEL = 'accounts.MyUser'

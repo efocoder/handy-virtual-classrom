@@ -67,7 +67,15 @@ def connect(request):
     if request.method == 'POST':
         form = ConnectForm(request.POST)
         if form.is_valid():
-            return form
+            room = form.cleaned_data['class_name']
+
+            token = twilio_detail.generate_access_token(request.user.username, room)
+            data = {
+                'access_token': token.decode('utf-8')
+            }
+            print(type(data))
+            print(data)
+            return JsonResponse(data)
 
     context = {'form': form}
     return render(request, 'landing/connect.html', context)
@@ -131,4 +139,3 @@ def invited_list_insert(twilio_sid, schedule_id, request):
         invite.save()
 
     return invite
-

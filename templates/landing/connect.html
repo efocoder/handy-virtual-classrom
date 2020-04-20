@@ -1,14 +1,111 @@
 {% extends 'layout/base.html' %}
 
 {% block javascript %}
+    <script>
+        let userAccessToken;
+        let unique_name
+        $('#form').submit(function (e) {
+            e.preventDefault();
+            unique_name = $('#id_class_name').val();
+            let csrftoken = $("[name=csrfmiddlewaretoken]").val();
+            $.ajax({
+                type: 'POST',
+                headers: {
+                    "X-CSRFToken": csrftoken
+                },
+                url: "{% url 'connect' %}",
+                dataType: 'json',
+                data: {
+                    'class_name': unique_name
+                },
+                beforeSend: function () {
+                    $("#submit").html("Connecting..");
+                    $("#submit").prop('disabled', true);
+                },
+                success: function (data) {
+                    userAccessToken = data.access_token;
+                    {#alert(userAccessToken);#}
+                    connectToRoom(userAccessToken);
+                },
+                error: function (error) {
+                    console.log(error)
+                }
+            });
+        });
 
+        function connectToRoom(token) {
+            Twilio.Video.connect(token, {video: true, audio: true, name: unique_name}).then(function (room) {
+                console.log('Successfully joined a Room: ', room);
+
+                Twilio.Video.createLocalTracks({
+                    audio: true,
+                    video: {width: 640}
+                }).then(localTracks => {
+                    return Twilio.Video.connect(token, {
+                        name: unique_name,
+                        tracks: localTracks
+                    });
+                }).then(room => {
+                    console.log(`Connected to Room: ${room.name}`);
+                });
+
+                room.participants.forEach(participant => {
+                    console.log(`Participant "${participant.identity}" is connected to the Room`);
+                });
+
+                // Log new Participants as they connect to the Room
+                room.once('participantConnected', participant => {
+                    console.log(`Participant "${participant.identity}" has connected to the Room`);
+                });
+
+                // Log Participants as they disconnect from the Room
+                room.once('participantDisconnected', participant => {
+                    console.log(`Participant "${participant.identity}" has disconnected from the Room`);
+                });
+
+
+                room.on('participantConnected', participant => {
+                    console.log(`Participant connected: ${participant.identity}`);
+                });
+
+                room.on('participantDisconnected', participant => {
+                    console.log(`Participant disconnected: ${participant.identity}`);
+                });
+
+                room.on('participantConnected', participant => {
+                    console.log(`Participant "${participant.identity}" connected`);
+
+                    participant.tracks.forEach(publication => {
+                        if (publication.isSubscribed) {
+                            const track = publication.track;
+                            document.getElementById('remote-media-div').appendChild(track.attach());
+                        }
+                    });
+
+                    participant.on('trackSubscribed', track => {
+                        document.getElementById('remote-media-div').appendChild(track.attach());
+                    });
+                });
+
+
+                Twilio.Video.createLocalVideoTrack().then(track => {
+                    const localMediaContainer = document.getElementById('local-media');
+                    localMediaContainer.appendChild(track.attach());
+                });
+
+
+            }, function (error) {
+                console.error('Unable to connect to Room: ' + error.message);
+            });
+        }
+    </script>
 {% endblock %}
 
 {% block content %}
     <div class="" style="margin-top: 10vh">
         <div class="container">
-            <div class="row  ">
-                <div class="col s10 m4 l4 offset-s1 offset-m4 offset-l4">
+            <div class="row">
+                <div class="col s10 m4 l4 offset-s1 offset-m4 offset-l4" id="form">
                     <form action="{% url 'connect' %}" method="post">
                         {% csrf_token %}
                         <div class="input-field ">
@@ -17,11 +114,21 @@
                             {{ form.class_name.errors }}
                         </div>
                         <button type="submit" class="btn waves-effect waves-light light-blue center-align center"
-                                name="action">
+                                name="action" id="submit">
                             Submit
                             <i class="material-icons right">send</i>
                         </button>
                     </form>
+                     <div id="local-media"></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s12 m9">
+                    <div id="remote-media-div"></div>
+                </div>
+                <div class="col s12 m3">
+{#                    <div id="local-media"></div>#}
                 </div>
             </div>
         </div>

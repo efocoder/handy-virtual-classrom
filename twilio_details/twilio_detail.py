@@ -1,3 +1,5 @@
+import json
+
 from twilio.base.exceptions import TwilioRestException
 from twilio.rest import Client, video
 from twilio.jwt.access_token import AccessToken
@@ -33,18 +35,17 @@ def create_room(request, unique_name):
         print(e)
 
 
-def generate_access_token(user_id, room):
+def generate_access_token(username, room):
     # Create an Access Token
     token = AccessToken(account_sid, api_sid, api_secret)
 
     # Set the Identity of this token
-    token.identity = user_id
+    token.identity = username
 
     # Grant access to Video
     grant = VideoGrant(room=room)
     token.add_grant(grant)
     # Serialize the token as a JWT
     jwt = token.to_jwt()
-    print(jwt)
-
+    # print(jwt)
     return jwt

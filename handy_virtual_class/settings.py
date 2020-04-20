@@ -31,7 +31,7 @@ SECRET_KEY = 'w*%x)#ox_-^l2x_yd_v3%xvn5httm=573hlh#)6jruc-q3_0o2'
 # DEBUG = True
 ADMIN_ENABLED = False
 
-ALLOWED_HOSTS = ['handy-vc.herokuapp.com', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['handy-vc.herokuapp.com', '127.0.0.1', 'localhost', '0.0.0.0']
 
 # Application definition
 
@@ -81,20 +81,24 @@ WSGI_APPLICATION = 'handy_virtual_class.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
-
-SECRET_KEY = config('SECRET_KEY')
-DEBUG = config('DEBUG', default=False, cast=bool)
 DATABASES = {
-    'default': dj_database_url.config(
-        default=config('DATABASE_URL')
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 }
+
+prod_db  =  dj_database_url.config(conn_max_age=500)
+
+DATABASES['default'].update(prod_db)
+
+# SECRET_KEY = config('SECRET_KEY')
+# DEBUG = config('DEBUG', default=False)
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default=config('DATABASE_URL')
+#     )
+# }
 
 AUTH_USER_MODEL = 'accounts.MyUser'
 

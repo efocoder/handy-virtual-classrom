@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8e9d0bb0-ab30-4cf8-a31c-d089223593c8" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/handy_virtual_class/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/handy_virtual_class/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -14,6 +15,11 @@
   </component>
   <component name="ProjectId" id="1aFuUOWpoMBpG4eyrcc6EmUZAMe" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -30,6 +36,7 @@
       <option name="presentableId" value="Default" />
       <updated>1587592053041</updated>
       <workItem from="1587592067614" duration="84000" />
+      <workItem from="1587592169387" duration="562000" />
     </task>
     <servers />
   </component>

@@ -28,6 +28,11 @@ def index(request):
                                  ) \
         .filter(schedule_id__start_date__exact=today.date(), schedule_id__time_start__gt=today.time()) \
         .order_by('schedule_id__time_start')
+    print("#####################")
+    id = ''
+    for id in upcoming:
+        id = id['schedule_id']
+    print(id)
 
     context = {
         'today': today,
@@ -53,7 +58,9 @@ def schedule(request):
 
             class_room = create_classroom(request, schedule.pk)
             print(class_room)
-
+            context = {
+                "class_name": class_room
+            }
             messages.success(request, 'Class schedules successfully')
             return redirect('landing')
 

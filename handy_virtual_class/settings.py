@@ -93,15 +93,11 @@ DATABASES = {
     }
 }
 
-import django_heroku
 
-# Activate Django-Heroku.
-django_heroku.settings(locals())
+import dj_database_url
 
-# import dj_database_url
-#
-# db_from_env = dj_database_url.config()
-# DATABASES['default'].update(db_from_env)
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
 
 
 

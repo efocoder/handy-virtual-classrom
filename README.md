@@ -2,6 +2,8 @@
 
 This is a project to enhance online teaching and learning during COVID-19 and beyond.
 
+Demo Link: https://handy-vc.herokuapp.com/
+
 It is built with Django version 3.0.5 with python 3.8.1
 
 ## Prerequisites
